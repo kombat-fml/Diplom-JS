@@ -1,12 +1,12 @@
 const path = require('path');
 module.exports = {
   entry: {
-    app: "./src/index.js",
-    critical: "./src/critical-scripts.js",
+    app: "./layout/src/index.js",
+    critical: "./layout/src/critical-scripts.js",
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, './dist')
+    path: path.resolve(__dirname, './layout/dist/')
   },
   mode: 'development',
   devServer: {
