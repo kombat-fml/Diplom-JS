@@ -7206,8 +7206,8 @@ div.wave-block:nth-child(17):after {
     -ms-flex-align: center;
     align-items: center;
     min-width: 1076px;
-    -webkit-transition: 0.4s;
-    transition: 0.4s;
+    /* -webkit-transition: 0.4s; */
+    /* transition: 0.4s; */
 }
 
 .nav-list-repair {

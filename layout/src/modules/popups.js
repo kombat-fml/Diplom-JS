@@ -1,16 +1,16 @@
 import returnScrollWidth from './scrollWidth';
 
-export const closeMenu = () => {
-  const menu = document.querySelector('.popup-menu');
-  menu.classList.remove('active');
-  scrollOn();
-}
 export const closeAllPopups = () => {
   const popup = document.querySelectorAll('.popup');
   popup.forEach(item => {
       item.classList.remove('active');
   })
   scrollOn();
+}
+
+export const openPopup = (popup) => {
+  popup.classList.add('active');
+  scrollOff();
 }
 
 export const closePopup = (popup) => {
