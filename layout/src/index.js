@@ -8,7 +8,7 @@ import bodyListeners from './modules/bodylisteners';
 import sendForm from './modules/sendForm';
 
 // smooth scroll
-smoothscroll(0.3);
+smoothscroll(0.2);
 phoneDropdown();
 mobileMenu();
 bodyListeners();

@@ -13,6 +13,11 @@ export const closeAllPopups = () => {
   scrollOn();
 }
 
+export const closePopup = (popup) => {
+  popup.classList.remove('active');
+  scrollOn();
+}
+
 export const scrollOn = () => {
   document.body.style.overflowY = 'auto';
   document.body.style.paddingRight = '';

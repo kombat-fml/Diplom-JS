@@ -18,7 +18,7 @@ const smoothscroll = (SPEED = 0.5) => {
         Math.max(pageY - progress / SPEED, pageY + coordinateElem) :
         Math.min(pageY + progress / SPEED, pageY + coordinateElem);
       window.scrollTo(0, r);
-      if (r < pageY + coordinateElem) requestAnimationFrame(step);
+      if ((coordinateElem > 0 && r < pageY + coordinateElem) || (coordinateElem < 0 && r > pageY + coordinateElem )) requestAnimationFrame(step);
     };
     requestAnimationFrame(step);
   };
