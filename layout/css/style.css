@@ -435,7 +435,7 @@ template, [hidden] {
     -webkit-box-align: end;
     -ms-flex-align: end;
     align-items: flex-end;
-    width: 164px;
+    /* width: 164px; */
     margin-left: 7px;
 }
 
@@ -457,8 +457,8 @@ template, [hidden] {
     -webkit-box-align: start;
     -ms-flex-align: start;
     align-items: flex-start;
-    width: 165px;
-    height: 30px;
+    /* width: 165px; */
+    /* height: 30px; */
     overflow: hidden;
 }
 
@@ -484,6 +484,12 @@ template, [hidden] {
     transition: 0.5s;
     opacity: 0;
 }
+.header-contacts__phone-number-accord.active {
+    top: 30px
+}
+.header-contacts__phone-number-accord.active .header-contacts__phone-number {
+    opacity: 1;
+}
 
 .header-contacts__arrow {
     cursor: pointer;
@@ -494,6 +500,9 @@ template, [hidden] {
 .header-contacts__arrow img {
     margin-top: 12px;
     margin-left: 5px;
+}
+.header-contacts__arrow.active {
+    transform: scale(1, -1);
 }
 
 .header-contacts__messagers {
@@ -4706,6 +4715,10 @@ div.wave-block:nth-child(17):after {
     color: #322823;
     z-index: 9999;
 }
+.popup.active {
+    visibility: visible;
+    opacity: 1;
+}
 
 @media (max-width: 575px) {
     .popup {
@@ -4801,6 +4814,10 @@ div.wave-block:nth-child(17):after {
     background-size: cover;
     -webkit-transition: 1s;
     transition: 1s;
+}
+.active .popup-dialog-menu {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
 }
 
 @media (max-width: 1024px) {
@@ -8624,6 +8641,11 @@ strong {
     font-size: 50px;
 }
 
+@media (max-width: 768px) {
+    .logo {
+        font-size: 30px;
+    }
+}
 @media (max-width: 575px) {
     .logo {
         padding-left: 7%;

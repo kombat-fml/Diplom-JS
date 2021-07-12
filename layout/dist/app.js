@@ -31,36 +31,91 @@ eval("\nmodule.exports = function () {\n\treturn /[\\u001b\\u009b][[()#;?]*(?:[0
 
 /***/ }),
 
-/***/ "./src/index.js":
-/*!**********************!*\
-  !*** ./src/index.js ***!
-  \**********************/
+/***/ "./layout/src/index.js":
+/*!*****************************!*\
+  !*** ./layout/src/index.js ***!
+  \*****************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_smoothscroll__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/smoothscroll */ \"./src/modules/smoothscroll.js\");\n/* harmony import */ var _modules_sendForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/sendForm */ \"./src/modules/sendForm.js\");\n\n\n\n // smooth scroll\n\n(0,_modules_smoothscroll__WEBPACK_IMPORTED_MODULE_0__.default)(0.3);\n\n//# sourceURL=webpack://3d-glo/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_smoothscroll__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/smoothscroll */ \"./layout/src/modules/smoothscroll.js\");\n/* harmony import */ var _modules_phoneDropdown__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/phoneDropdown */ \"./layout/src/modules/phoneDropdown.js\");\n/* harmony import */ var _modules_mobileMenu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/mobileMenu */ \"./layout/src/modules/mobileMenu.js\");\n/* harmony import */ var _modules_bodylisteners__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/bodylisteners */ \"./layout/src/modules/bodylisteners.js\");\n/* harmony import */ var _modules_sendForm__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/sendForm */ \"./layout/src/modules/sendForm.js\");\n\n\n\n\n\n\n // smooth scroll\n\n(0,_modules_smoothscroll__WEBPACK_IMPORTED_MODULE_0__.default)(0.3);\n(0,_modules_phoneDropdown__WEBPACK_IMPORTED_MODULE_1__.default)();\n(0,_modules_mobileMenu__WEBPACK_IMPORTED_MODULE_2__.default)();\n(0,_modules_bodylisteners__WEBPACK_IMPORTED_MODULE_3__.default)();\n\n//# sourceURL=webpack://3d-glo/./layout/src/index.js?");
 
 /***/ }),
 
-/***/ "./src/modules/sendForm.js":
-/*!*********************************!*\
-  !*** ./src/modules/sendForm.js ***!
-  \*********************************/
+/***/ "./layout/src/modules/bodylisteners.js":
+/*!*********************************************!*\
+  !*** ./layout/src/modules/bodylisteners.js ***!
+  \*********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nvar sendForm = function sendForm(formId) {\n  var errorMsg = \"Что-то пошло не так...\",\n      loadMsg = \"\\n    <div class=\\\"preload-block\\\"></div>\\n    \",\n      successMsg = \"Сообщение отправлено! Скоро с Вами свяжемся!\";\n  var form = document.getElementById(formId);\n  var statusMessage = document.createElement('div');\n\n  var postData = function postData(data) {\n    return fetch('server.php', {\n      method: 'POST',\n      headers: {\n        'Content-Type': 'application/json'\n      },\n      body: JSON.stringify(data)\n    });\n  };\n\n  statusMessage.style.cssText = 'font-size: 2rem;';\n  form.addEventListener('submit', function (event) {\n    event.preventDefault();\n    var formData = new FormData(form);\n    var data = {};\n    formData.forEach(function (value, key) {\n      return data[key] = value;\n    });\n    form.appendChild(statusMessage);\n    statusMessage.innerHTML = loadMsg;\n    postData(data).then(function (response) {\n      if (response.status !== 200) {\n        throw new Error('status network not 200!');\n      }\n\n      statusMessage.textContent = successMsg;\n      form.reset();\n      setTimeout(function () {\n        statusMessage.textContent = \"\";\n      }, 5000);\n    })[\"catch\"](function (error) {\n      statusMessage.textContent = errorMsg;\n      console.error(error);\n      setTimeout(function () {\n        statusMessage.textContent = \"\";\n      }, 5000);\n    });\n  });\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (sendForm);\n\n//# sourceURL=webpack://3d-glo/./src/modules/sendForm.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _popups__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./popups */ \"./layout/src/modules/popups.js\");\n\n\nvar bodyListeners = function bodyListeners() {\n  document.body.addEventListener('keydown', function (event) {\n    var key = event.key;\n\n    if (key === 'Escape') {\n      (0,_popups__WEBPACK_IMPORTED_MODULE_0__.closeAllPopups)();\n    }\n  });\n  document.body.addEventListener('click', function (event) {\n    var target = event.target;\n\n    if (target.closest('.popup') && !target.closest('.popup-wrapper')) {\n      (0,_popups__WEBPACK_IMPORTED_MODULE_0__.closeAllPopups)();\n    }\n\n    ;\n  });\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (bodyListeners);\n\n//# sourceURL=webpack://3d-glo/./layout/src/modules/bodylisteners.js?");
 
 /***/ }),
 
-/***/ "./src/modules/smoothscroll.js":
-/*!*************************************!*\
-  !*** ./src/modules/smoothscroll.js ***!
-  \*************************************/
+/***/ "./layout/src/modules/mobileMenu.js":
+/*!******************************************!*\
+  !*** ./layout/src/modules/mobileMenu.js ***!
+  \******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nvar smoothscroll = function smoothscroll() {\n  var SPEED = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0.5;\n  var smoothlinks = document.querySelectorAll('a[href^=\"#\"]:not([href=\"#\"])');\n\n  var scrolled = function scrolled(event) {\n    event.preventDefault();\n    var start = 0;\n    var pageY = window.pageYOffset,\n        hash = event.target.closest('a').getAttribute('href'),\n        elem = document.querySelector(hash),\n        coordinateElem = elem.getBoundingClientRect().top - 10;\n\n    var step = function step(time) {\n      if (!start) start = time;\n      var progress = time - start;\n      var r = coordinateElem < 0 ? Math.max(pageY - progress / SPEED, pageY + coordinateElem) : Math.min(pageY + progress / SPEED, pageY + coordinateElem);\n      window.scrollTo(0, r);\n      if (r < pageY + coordinateElem) requestAnimationFrame(step);\n    };\n\n    requestAnimationFrame(step);\n  };\n\n  smoothlinks.forEach(function (elem) {\n    return elem.addEventListener('click', scrolled);\n  });\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (smoothscroll);\n\n//# sourceURL=webpack://3d-glo/./src/modules/smoothscroll.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _popups__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./popups */ \"./layout/src/modules/popups.js\");\n\n\nvar mobileMenu = function mobileMenu() {\n  var menu = document.querySelector('.popup-menu'),\n      menuIcon = document.querySelector('.menu__icon'),\n      closeMenuBtn = document.querySelector('.close-menu');\n  menuIcon.addEventListener('click', function () {\n    menu.classList.add('active');\n    (0,_popups__WEBPACK_IMPORTED_MODULE_0__.scrollOff)();\n  });\n  closeMenuBtn.addEventListener('click', _popups__WEBPACK_IMPORTED_MODULE_0__.closeMenu);\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (mobileMenu);\n\n//# sourceURL=webpack://3d-glo/./layout/src/modules/mobileMenu.js?");
+
+/***/ }),
+
+/***/ "./layout/src/modules/phoneDropdown.js":
+/*!*********************************************!*\
+  !*** ./layout/src/modules/phoneDropdown.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nvar phoneDropdown = function phoneDropdown() {\n  var button = document.querySelector('.header-contacts__arrow'),\n      dropdown = document.querySelector('.header-contacts__phone-number-accord');\n  button.addEventListener('click', function () {\n    dropdown.classList.toggle('active');\n    button.classList.toggle('active');\n  });\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (phoneDropdown);\n\n//# sourceURL=webpack://3d-glo/./layout/src/modules/phoneDropdown.js?");
+
+/***/ }),
+
+/***/ "./layout/src/modules/popups.js":
+/*!**************************************!*\
+  !*** ./layout/src/modules/popups.js ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"closeMenu\": () => (/* binding */ closeMenu),\n/* harmony export */   \"closeAllPopups\": () => (/* binding */ closeAllPopups),\n/* harmony export */   \"scrollOn\": () => (/* binding */ scrollOn),\n/* harmony export */   \"scrollOff\": () => (/* binding */ scrollOff)\n/* harmony export */ });\n/* harmony import */ var _scrollWidth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./scrollWidth */ \"./layout/src/modules/scrollWidth.js\");\n\nvar closeMenu = function closeMenu() {\n  var menu = document.querySelector('.popup-menu');\n  menu.classList.remove('active');\n  scrollOn();\n};\nvar closeAllPopups = function closeAllPopups() {\n  var popup = document.querySelectorAll('.popup');\n  popup.forEach(function (item) {\n    item.classList.remove('active');\n  });\n  scrollOn();\n};\nvar scrollOn = function scrollOn() {\n  document.body.style.overflowY = 'auto';\n  document.body.style.paddingRight = '';\n};\nvar scrollOff = function scrollOff() {\n  document.body.style.overflowY = 'hidden';\n  document.body.style.paddingRight = (0,_scrollWidth__WEBPACK_IMPORTED_MODULE_0__.default)() + 'px';\n};\n\n//# sourceURL=webpack://3d-glo/./layout/src/modules/popups.js?");
+
+/***/ }),
+
+/***/ "./layout/src/modules/scrollWidth.js":
+/*!*******************************************!*\
+  !*** ./layout/src/modules/scrollWidth.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nvar returnScrollWidth = function returnScrollWidth() {\n  var div = document.createElement('div');\n  div.style.overflowY = 'scroll';\n  div.style.width = '50px';\n  div.style.height = '50px'; // мы должны вставить элемент в документ, иначе размеры будут равны 0\n\n  document.body.append(div);\n  var scrollWidth = div.offsetWidth - div.clientWidth;\n  div.remove();\n  return scrollWidth;\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (returnScrollWidth);\n\n//# sourceURL=webpack://3d-glo/./layout/src/modules/scrollWidth.js?");
+
+/***/ }),
+
+/***/ "./layout/src/modules/sendForm.js":
+/*!****************************************!*\
+  !*** ./layout/src/modules/sendForm.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nvar sendForm = function sendForm(formId) {\n  var errorMsg = \"Что-то пошло не так...\",\n      loadMsg = \"\\n    <div class=\\\"preload-block\\\"></div>\\n    \",\n      successMsg = \"Сообщение отправлено! Скоро с Вами свяжемся!\";\n  var form = document.getElementById(formId);\n  var statusMessage = document.createElement('div');\n\n  var postData = function postData(data) {\n    return fetch('server.php', {\n      method: 'POST',\n      headers: {\n        'Content-Type': 'application/json'\n      },\n      body: JSON.stringify(data)\n    });\n  };\n\n  statusMessage.style.cssText = 'font-size: 2rem;';\n  form.addEventListener('submit', function (event) {\n    event.preventDefault();\n    var formData = new FormData(form);\n    var data = {};\n    formData.forEach(function (value, key) {\n      return data[key] = value;\n    });\n    form.appendChild(statusMessage);\n    statusMessage.innerHTML = loadMsg;\n    postData(data).then(function (response) {\n      if (response.status !== 200) {\n        throw new Error('status network not 200!');\n      }\n\n      statusMessage.textContent = successMsg;\n      form.reset();\n      setTimeout(function () {\n        statusMessage.textContent = \"\";\n      }, 5000);\n    })[\"catch\"](function (error) {\n      statusMessage.textContent = errorMsg;\n      console.error(error);\n      setTimeout(function () {\n        statusMessage.textContent = \"\";\n      }, 5000);\n    });\n  });\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (sendForm);\n\n//# sourceURL=webpack://3d-glo/./layout/src/modules/sendForm.js?");
+
+/***/ }),
+
+/***/ "./layout/src/modules/smoothscroll.js":
+/*!********************************************!*\
+  !*** ./layout/src/modules/smoothscroll.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nvar smoothscroll = function smoothscroll() {\n  var SPEED = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0.5;\n  var smoothlinks = document.querySelectorAll('a[href^=\"#\"]:not([href=\"#\"])');\n\n  var scrolled = function scrolled(event) {\n    event.preventDefault();\n    var start = 0;\n    var pageY = window.pageYOffset,\n        hash = event.target.closest('a').getAttribute('href'),\n        elem = document.querySelector(hash),\n        coordinateElem = elem.getBoundingClientRect().top - 10;\n\n    var step = function step(time) {\n      if (!start) start = time;\n      var progress = time - start;\n      var r = coordinateElem < 0 ? Math.max(pageY - progress / SPEED, pageY + coordinateElem) : Math.min(pageY + progress / SPEED, pageY + coordinateElem);\n      window.scrollTo(0, r);\n      if (r < pageY + coordinateElem) requestAnimationFrame(step);\n    };\n\n    requestAnimationFrame(step);\n  };\n\n  smoothlinks.forEach(function (elem) {\n    return elem.addEventListener('click', scrolled);\n  });\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (smoothscroll);\n\n//# sourceURL=webpack://3d-glo/./layout/src/modules/smoothscroll.js?");
 
 /***/ }),
 
@@ -450,7 +505,7 @@ eval("var map = {\n\t\"./log\": \"./node_modules/webpack/hot/log.js\"\n};\n\n\nf
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	__webpack_require__("./src/index.js");
+/******/ 	__webpack_require__("./layout/src/index.js");
 /******/ 	var __webpack_exports__ = __webpack_require__("./node_modules/webpack-dev-server/client/index.js?http://localhost:8080");
 /******/ 	
 /******/ })()

@@ -31,13 +31,13 @@ eval("\nmodule.exports = function () {\n\treturn /[\\u001b\\u009b][[()#;?]*(?:[0
 
 /***/ }),
 
-/***/ "./src/critical-scripts.js":
-/*!*********************************!*\
-  !*** ./src/critical-scripts.js ***!
-  \*********************************/
+/***/ "./layout/src/critical-scripts.js":
+/*!****************************************!*\
+  !*** ./layout/src/critical-scripts.js ***!
+  \****************************************/
 /***/ (() => {
 
-eval("console.log('Critical scripts');\n\n//# sourceURL=webpack://3d-glo/./src/critical-scripts.js?");
+eval("console.log('Critical scripts');\n\n//# sourceURL=webpack://3d-glo/./layout/src/critical-scripts.js?");
 
 /***/ }),
 
@@ -404,7 +404,7 @@ eval("var map = {\n\t\"./log\": \"./node_modules/webpack/hot/log.js\"\n};\n\n\nf
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	__webpack_require__("./src/critical-scripts.js");
+/******/ 	__webpack_require__("./layout/src/critical-scripts.js");
 /******/ 	var __webpack_exports__ = __webpack_require__("./node_modules/webpack-dev-server/client/index.js?http://localhost:8080");
 /******/ 	
 /******/ })()
