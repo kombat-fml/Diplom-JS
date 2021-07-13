@@ -24,6 +24,7 @@ const bodyListeners = () => {
 
     if (target.closest('.menu__icon')) openPopup(document.querySelector('.popup-menu'));
 
+    if (target.matches('.link-privacy')) openPopup(document.querySelector('.popup-privacy'));
 
   })
 }
