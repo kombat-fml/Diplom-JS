@@ -40,6 +40,9 @@ const prompts = () => {
     wrap: '.formula-slider',
     slidesToShow: 3,
     infinity: true,
+    cloneSlides: true,
+    cloneClass: 'formula-slider__slide-clone',
+    activeClass: 'formula-slider__slide-active',
     prev: '#formula-arrow_left',
     next: '#formula-arrow_right',
     responsive: [{
@@ -48,10 +51,6 @@ const prompts = () => {
     },
     {
       breakpoint: 768,
-      slidesToShow: 2
-    },
-    {
-      breakpoint: 576,
       slidesToShow: 1
     }]
   });

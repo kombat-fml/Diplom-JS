@@ -1,5 +1,5 @@
 class SliderCarousel {
-  constructor({ main, wrap, next, prev, infinity = false, position = 0, slidesToShow = 3, responsive = [] }) {
+  constructor({ main, wrap, next, prev, infinity = false, position = 0, slidesToShow = 3, cloneSlides = false, cloneClass = 'glo-slider__item-cloned', activeClass = 'glo-slider__item-active', responsive = [] }) {
     if (!main || !wrap) {
       console.warn('slider-carousel: Необходимо 2 свойства, "main" и "wrap"!!!');
     }
@@ -12,21 +12,26 @@ class SliderCarousel {
     this.options = {
       position,
       infinity,
+      cloneSlides,
+      cloneClass,
+      activeClass,
       widthSlide: Math.floor(100 / this.slidesToShow),
     };
     this.responsive = responsive;
+    this.currentCountSlides = this.slides.length;
   }
 
   init() {
     this.addGloClass();
     this.addStyle();
+    if (this.options.infinity && this.options.cloneSlides) this.addCloneSlides();
     if (this.prev && this.next) {
       this.controlSlider();
     } else {
       this.addArrow();
       this.controlSlider();
     }
-
+    this.changeACtiveSlide();
     if (this.responsive) {
       this.responseInit();
     }
@@ -38,6 +43,28 @@ class SliderCarousel {
     for (const item of this.slides) {
       item.classList.add('glo-slider__item');
     }
+  }
+
+  addCloneSlides() {
+    const firstSlide = this.slides[0].cloneNode(true),
+      lastSlide = this.slides[this.slides.length - 1].cloneNode(true);
+
+    firstSlide.classList.add(this.options.cloneClass);
+    lastSlide.classList.add(this.options.cloneClass);
+    this.wrap.insertAdjacentElement('beforeend', firstSlide);
+    this.wrap.insertAdjacentElement('afterbegin', lastSlide);
+  }
+
+  changeACtiveSlide() {
+    console.log(this.options.position);
+    for (let i = 0; i < this.slides.length; i++) {
+      if (i !== this.options.position + 1) {
+        this.slides[i].classList.remove(this.options.activeClass);
+      } else {
+        this.slides[i].classList.add(this.options.activeClass);
+      }
+    };
+    // this.slides.forEach()
   }
 
   addStyle() {
@@ -57,7 +84,7 @@ class SliderCarousel {
         will-change: transform;
       }
       .glo-slider__item {
-        display: flex !important;
+        display: flex;
         align-items: center;
         justify-content: center;
         flex: 0 0 ${this.options.widthSlide}%;
@@ -76,20 +103,22 @@ class SliderCarousel {
     if (this.options.infinity || this.options.position > 0) {
       --this.options.position;
       if (this.options.position < 0) {
-        this.options.position = this.slides.length - this.slidesToShow;
+        this.options.position = this.currentCountSlides - this.slidesToShow;
       }
       this.wrap.style.transform = `translateX(-${this.options.position * this.options.widthSlide}%)`;
     }
+    this.changeACtiveSlide();
   }
 
   nextSlider() {
     if (this.options.infinity || this.options.position < this.slides.length - this.slidesToShow) {
       ++this.options.position;
-      if (this.options.position > this.slides.length - this.slidesToShow) {
+      if (this.options.position > this.currentCountSlides - this.slidesToShow) {
         this.options.position = 0;
       }
       this.wrap.style.transform = `translateX(-${this.options.position * this.options.widthSlide}%)`;
     }
+    this.changeACtiveSlide();
   }
 
   addArrow() {
@@ -141,6 +170,11 @@ class SliderCarousel {
             this.options.widthSlide = Math.floor(100 / this.slidesToShow);
             this.wrap.style.transform = `translateX(-${this.options.position * this.options.widthSlide}%)`;
             this.addStyle();
+            if (this.responsive[i].slidesToShow === 1) {
+              this.currentCountSlides = this.slides.length - 2;
+            } else {
+              this.currentCountSlides = this.slides.length;
+            }
           }
         }
       } else {
@@ -149,6 +183,8 @@ class SliderCarousel {
         this.wrap.style.transform = `translateX(-${this.options.position * this.options.widthSlide}%)`;
         this.addStyle();
       }
+      this.changeACtiveSlide();
+
     };
 
     checkResponse();

@@ -1161,6 +1161,24 @@ template, [hidden] {
 .formula-slider__slide .formula-item__icon__descr {
     font-size: 18px;
 }
+.formula-slider__slide-active {
+    opacity: 1;
+}
+.formula-slider__slide-active .formula-item-popup{
+    visibility: visible;
+    opacity: 1;
+}
+.formula-slider__slide-active .formula-item__icon-inner{
+    background: -webkit-gradient(linear, left top, right top, from(#F48922), to(#FFB015));
+    background: linear-gradient(90deg, #F48922 0%, #FFB015 100%);
+}
+
+@media (max-width: 767px) {
+    .formula-slider__slide-clone {
+        display: none !important;
+    }
+}
+
 .formula-slider-wrap {
     min-height: 400px;
     margin-top: 102px;
