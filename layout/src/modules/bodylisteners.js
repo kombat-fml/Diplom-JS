@@ -1,4 +1,4 @@
-import { closeAllPopups, closePopup, openPopup } from "./popups"
+import { closeAllPopups, closePopup, openPopup } from "./popups";
 
 const bodyListeners = () => {
   document.body.addEventListener('keydown', event => {
