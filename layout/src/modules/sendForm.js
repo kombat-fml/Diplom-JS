@@ -1,13 +1,9 @@
 import { closePopup, openPopup } from './popups';
 
 const sendForm = (formId) => {
-  const popupThank = document.querySelector('.popup-thank');
-
-  const errorMsg = 'Что-то пошло не так...',
-    loadMsg = `
-    <div class="preload-block"></div>
-    `,
-    successMsg = 'Сообщение отправлено! Скоро с Вами свяжемся!';
+  const popupThank = document.querySelector('.popup-thank'),
+    thankTitle = document.querySelector('.popup-thank__title'),
+    thankDescr = document.querySelector('.popup-thank__descr');
 
   const form = document.getElementById(formId);
   const statusMessage = document.createElement('div');
@@ -27,41 +23,43 @@ const sendForm = (formId) => {
     const data = {};
     formData.forEach((value, key) => (data[key] = value));
     form.appendChild(statusMessage);
-    statusMessage.innerHTML = loadMsg;
     postData(data)
       .then((response) => {
         if (response.status !== 200) {
           throw new Error('status network not 200!');
         }
-        statusMessage.textContent = successMsg;
+        showModal('Спасибо за обращение!', 'Ожидайте звонка нашего специалиста. Будем рады помочь Вам!');
         form.reset();
-        setTimeout(() => {
-          statusMessage.textContent = '';
-        }, 5000);
+        hideModal();
       })
       .catch((error) => {
-        statusMessage.textContent = errorMsg;
+        showModal('Ошибка отправки сообщения');
         console.error(error);
-        setTimeout(() => {
-          statusMessage.textContent = '';
-        }, 5000);
+        hideModal();
       });
   };
 
   statusMessage.style.cssText = 'font-size: 2rem;';
+
   form.addEventListener('submit', (event) => {
     event.preventDefault();
-    const target = event.target;
-    // проверка на валидность
+    // const target = event.target;
+    // проверка на валидность ***
     request(form);
   });
 
-  const showModal = () => {
+  const showModal = (title, msg = '') => {
+    thankTitle.textContent = title;
+    thankDescr.textContent = msg;
     openPopup(popupThank);
+    console.log('show');
   };
 
   const hideModal = () => {
-    setTimeout(closePopup(popupThank), 3000);
+    setTimeout(() => {
+      closePopup(popupThank);
+    }, 3000);
+    console.log('hide');
   };
 };
 export default sendForm;

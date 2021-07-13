@@ -11,7 +11,7 @@ module.exports = {
   mode: 'development',
   devServer: {
     open: true,
-    port: 8080,
+    port: 3000,
     liveReload: true,
     writeToDisk: true,
   },
