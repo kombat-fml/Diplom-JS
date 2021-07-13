@@ -1,5 +1,5 @@
 class SliderCarousel {
-  constructor({ main, wrap, next, prev, infinity = false, position = 0, slidesToShow = 3, cloneSlides = false, cloneClass = 'glo-slider__item-cloned', activeClass = 'glo-slider__item-active', responsive = [] }) {
+  constructor({ main, addDefaultStyles = true, mainClass = 'glo-slider', wrap, wrapClass = 'glo-slider__wrap', itemClass = 'glo-slider__item', next, prev, infinity = false, position = 0, slidesToShow = 3, cloneSlides = false, cloneClass = 'glo-slider__item-cloned', activeClass = 'glo-slider__item-active', responsive = [] }) {
     if (!main || !wrap) {
       console.warn('slider-carousel: Необходимо 2 свойства, "main" и "wrap"!!!');
     }
@@ -12,9 +12,13 @@ class SliderCarousel {
     this.options = {
       position,
       infinity,
+      mainClass,
+      wrapClass,
+      itemClass,
       cloneSlides,
       cloneClass,
       activeClass,
+      addDefaultStyles,
       widthSlide: Math.floor(100 / this.slidesToShow),
     };
     this.responsive = responsive;
@@ -38,10 +42,10 @@ class SliderCarousel {
   }
 
   addGloClass() {
-    this.main.classList.add('glo-slider');
-    this.wrap.classList.add('glo-slider__wrap');
+    this.main.classList.add(this.options.mainClass);
+    this.wrap.classList.add(this.options.wrapClass);
     for (const item of this.slides) {
-      item.classList.add('glo-slider__item');
+      item.classList.add(this.options.itemClass);
     }
   }
 
@@ -56,7 +60,6 @@ class SliderCarousel {
   }
 
   changeACtiveSlide() {
-    console.log(this.options.position);
     for (let i = 0; i < this.slides.length; i++) {
       if (i !== this.options.position + 1) {
         this.slides[i].classList.remove(this.options.activeClass);
@@ -64,35 +67,36 @@ class SliderCarousel {
         this.slides[i].classList.add(this.options.activeClass);
       }
     };
-    // this.slides.forEach()
   }
 
   addStyle() {
-    let style = document.getElementById('sliderCarousel-style');
-    if (!style) {
-      style = document.createElement('style');
-      style.id = 'sliderCarousel-style';
-    }
-    style.textContent = `
-      .glo-slider {
-        overflow: hidden;
+    if (this.options.addDefaultStyles) {
+      let style = document.getElementById(`${this.options.mainClass}-styles`);
+      if (!style) {
+        style = document.createElement('style');
+        style.id = `${this.options.mainClass}-styles`;
       }
-      .glo-slider__wrap {
-        display: flex;
-        align-items: center;
-        transition: transform 0.5s;
-        will-change: transform;
-      }
-      .glo-slider__item {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex: 0 0 ${this.options.widthSlide}%;
-        margin: 0;
-      }
-    `;
+      style.textContent = `
+        .${this.options.mainClass} {
+          overflow: hidden;
+        }
+        .${this.options.wrapClass} {
+          display: flex;
+          align-items: center;
+          transition: transform 0.5s;
+          will-change: transform;
+        }
+        .${this.options.itemClass} {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex: 0 0 ${this.options.widthSlide}%;
+          margin: 0;
+        }
+      `;
 
-    document.head.appendChild(style);
+      document.head.appendChild(style);
+    }
   }
   controlSlider() {
     this.prev.addEventListener('click', this.prevSlider.bind(this));

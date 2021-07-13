@@ -1716,10 +1716,6 @@ template, [hidden] {
         font-size: 16px;
         margin-top: 0;
     }
-
-    .repair-types-nav__item svg {
-        height: 37px;
-    }
 }
 
 @media (max-width: 575px) {
@@ -9014,4 +9010,33 @@ strong {
 
 .slider-dots {
     display: none;
+}
+
+.types-repair {
+    display: none;
+}
+.types-repair.active {
+    display: block;
+}
+.repair-types-slider__slide {
+    display: none;
+}
+.repair-types-slider__slide.active {
+    display: block;
+}
+.repair-types .repair-slider-slide {
+    display: inline-block;
+}
+.repair-types .repair-slider-wrapper {
+    min-width: auto;
+    flex-wrap: nowrap;
+}
+
+@media (max-width: 1024px) {
+    .repair-types-nav__item svg {
+        height: 37px;
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+        transform: translateX(-50%);
+    }
 }
