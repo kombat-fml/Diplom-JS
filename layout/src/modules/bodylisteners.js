@@ -26,6 +26,8 @@ const bodyListeners = () => {
 
     if (target.matches('.link-privacy')) openPopup(document.querySelector('.popup-privacy'));
 
+    if (target.matches('.button_wide')) openPopup(document.querySelector('.popup-consultation'));
+
   })
 }
 
