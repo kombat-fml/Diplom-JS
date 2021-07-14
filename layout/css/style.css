@@ -4498,7 +4498,7 @@ div.wave-block:nth-child(17):after {
 .msg {
     position: relative;
     margin-top: 0;
-    max-height: 0;
+    height: 0;
     opacity: 0;
     -webkit-transform: translate(0, 50%);
     transform: translate(0, 50%);
@@ -4527,7 +4527,6 @@ div.wave-block:nth-child(17):after {
 .msg-active ~ .msg {
     position: relative;
     overflow: hidden;
-    max-height: 100%;
     opacity: 1;
     -webkit-transition: all 0.5s ease-in-out;
     transition: all 0.5s ease-in-out;

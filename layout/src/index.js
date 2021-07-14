@@ -13,6 +13,7 @@ import portfolioPopupSlider from './modules/portfolioPopupSlider';
 import documents from './modules/documents';
 import documentsPopup from './modules/documentsPopup';
 import reviews from './modules/reviews';
+import accordion from './modules/accordion';
 
 smoothscroll(0.2);
 phoneDropdown();
@@ -34,3 +35,4 @@ portfolioPopupSlider();
 documents();
 documentsPopup();
 reviews();
+accordion();
