@@ -4197,7 +4197,7 @@ div.wave-block:nth-child(17):after {
 .reviews-slider__slide {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: flex;
+    display: none;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
@@ -4208,6 +4208,9 @@ div.wave-block:nth-child(17):after {
     text-align: center;
     color: #322823;
     min-height: 100%;
+}
+.reviews-slider__slide.reviews-slide-active {
+    display: flex;
 }
 
 .reviews-slider__slide-img {
@@ -9025,9 +9028,9 @@ strong {
     transform: scale(1, -1);
 }
 
-.slider-dots {
+/* .slider-dots {
     display: none;
-}
+} */
 
 .types-repair {
     display: none;

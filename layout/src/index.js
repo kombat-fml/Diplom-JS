@@ -12,6 +12,7 @@ import portfolioMobile from './modules/portfolioMobile';
 import portfolioPopupSlider from './modules/portfolioPopupSlider';
 import documents from './modules/documents';
 import documentsPopup from './modules/documentsPopup';
+import reviews from './modules/reviews';
 
 smoothscroll(0.2);
 phoneDropdown();
@@ -32,3 +33,4 @@ portfolioMobile();
 portfolioPopupSlider();
 documents();
 documentsPopup();
+reviews();
