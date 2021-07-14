@@ -7,6 +7,8 @@ import maskPhone from "./modules/maskPhone";
 import sendForm from './modules/sendForm';
 import prompts from './modules/prompts';
 import repairTabs from './modules/repairTabs';
+import portfolio from './modules/portfolio';
+import portfolioMobile from './modules/portfolioMobile';
 
 smoothscroll(0.2);
 phoneDropdown();
@@ -22,3 +24,5 @@ sendForm('feedback6');
 
 prompts();
 repairTabs();
+portfolio();
+portfolioMobile();

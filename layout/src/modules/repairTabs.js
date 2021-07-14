@@ -26,7 +26,6 @@ const repairTabs = () => {
   const changeSlide = (slider, direction = 0) => {
     if (direction === 0) {
       slider.children[0].classList.add('active');
-      return;
     }
     const currSlide = currentSlide(slider),
       countSlides = slider.children.length;
