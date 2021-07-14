@@ -9096,3 +9096,10 @@ strong {
         height: auto;
     }
 }
+
+.popup-transparency-slider__slide {
+    display: none;
+}
+.popup-transparency-slider__slide.active {
+    display: block;
+}
