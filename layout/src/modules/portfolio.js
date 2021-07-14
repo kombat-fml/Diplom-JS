@@ -1,4 +1,3 @@
-import SliderCarousel from "./sliderCarousel";
 import { openPopup } from "./popups";
 
 const portfolio = () => {

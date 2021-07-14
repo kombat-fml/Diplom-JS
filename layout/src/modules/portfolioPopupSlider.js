@@ -1,6 +1,7 @@
-const portfolioMobile = () => {
-  const section = document.querySelector('.portfolio-slider-wrap'),
-    slider = document.querySelector('.portfolio-slider-mobile');
+const portfolioPopupSlider = () => {
+  const section = document.querySelector('.popup-portfolio-slider-wrap'),
+    slider = document.querySelector('.popup-portfolio-slider'),
+    textWrapper = document.querySelector('.popup-portfolio-text-wrapper');
 
   const removeActiveClass = (parentEl) => {
     [...parentEl.children].forEach(item => item.classList.remove('active'));
@@ -24,22 +25,28 @@ const portfolioMobile = () => {
   const changeSlide = (slider, direction = 0) => {
     if (direction === 0) {
       slider.children[0].classList.add('active');
+      textWrapper.children[0].classList.add('active');
     }
     const currSlide = currentSlide(slider),
       countSlides = slider.children.length;
 
     removeActiveClass(slider);
+    removeActiveClass(textWrapper);
+
     switch (true) {
       case (direction === -1 && currSlide === 0): {
         slider.children[countSlides - 1].classList.add('active');
+        textWrapper.children[countSlides - 1].classList.add('active');
         break;
       }
       case (direction === 1 && currSlide === countSlides - 1): {
         slider.children[0].classList.add('active');
+        textWrapper.children[0].classList.add('active');
         break;
       }
       default: {
         slider.children[currSlide + direction].classList.add('active');
+        textWrapper.children[currSlide + direction].classList.add('active');
       }
     }
     changeCounter(slider);
@@ -49,9 +56,9 @@ const portfolioMobile = () => {
   section.addEventListener('click', event => {
     const target = event.target;
 
-    if (target.closest('#portfolio-arrow-mobile_left')) changeSlide(slider, -1);
-    if (target.closest('#portfolio-arrow-mobile_right')) changeSlide(slider, 1);
+    if (target.closest('#popup_portfolio_left')) changeSlide(slider, -1);
+    if (target.closest('#popup_portfolio_right')) changeSlide(slider, 1);
   })
 }
 
-export default portfolioMobile;
+export default portfolioPopupSlider;

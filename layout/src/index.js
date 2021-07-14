@@ -9,6 +9,7 @@ import prompts from './modules/prompts';
 import repairTabs from './modules/repairTabs';
 import portfolio from './modules/portfolio';
 import portfolioMobile from './modules/portfolioMobile';
+import portfolioPopupSlider from './modules/portfolioPopupSlider';
 
 smoothscroll(0.2);
 phoneDropdown();
@@ -26,3 +27,4 @@ prompts();
 repairTabs();
 portfolio();
 portfolioMobile();
+portfolioPopupSlider();
