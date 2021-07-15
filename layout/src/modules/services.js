@@ -1,6 +1,5 @@
 const services = () => {
   const navListPopupRepair = document.querySelector('.nav-list-popup-repair'),
-
     contentTable = document.querySelector('.popup-repair-types-content-table'),
     popupSection = document.querySelector('.popup-dialog-repair-types');
 
