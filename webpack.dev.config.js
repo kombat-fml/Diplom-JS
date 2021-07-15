@@ -3,6 +3,8 @@ module.exports = {
   entry: {
     app: "./layout/src/index.js",
     critical: "./layout/src/critical-scripts.js",
+    admin: "./layout/src/admin.js",
+    auth: "./layout/src/auth.js",
   },
   output: {
     filename: '[name].js',
@@ -11,7 +13,7 @@ module.exports = {
   mode: 'development',
   devServer: {
     open: true,
-    port: 3000,
+    port: 8080,
     liveReload: true,
     writeToDisk: true,
   },

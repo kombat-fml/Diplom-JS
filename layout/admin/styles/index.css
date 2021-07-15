@@ -70,6 +70,10 @@ body {
 .button-ui_firm:hover {
     background-color: var(--hover_color);
 }
+.button-ui_firm:disabled {
+    cursor: auto;
+    background-color: var(--black-color);
+}
 
 .svg_ui {
     display: inline-flex;
