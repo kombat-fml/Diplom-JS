@@ -3,7 +3,7 @@ const accordion = () => {
   const accordionListItem = document.querySelectorAll('.accordion-item');
 
   accordionListItem.forEach((elem) => {
-    if (elem.children[1].classList.contains('active')) {
+    if (elem.children[0].classList.contains('msg-active')) {
       elem.children[1].style.height = `${elem.children[1].scrollHeight}px`;
     }
   });
@@ -39,12 +39,7 @@ const accordion = () => {
     }
   });
 
-  document.body.addEventListener('click', (event) => {
-    const target = event.target;
-    if (!target.closest('.accordion')) {
-      closeAllDrops();
-    }
-  });
+
 };
 
 export default accordion;

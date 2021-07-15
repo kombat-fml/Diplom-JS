@@ -5236,8 +5236,13 @@ div.wave-block:nth-child(17):after {
     margin-top: 22px;
     text-align: left;
     padding-left: 22px;
-    border: 3px solid #EEEBE5 !important;
+}
+.button_o.popup-repair-types-nav__item {
+    border: 3px solid #EEEBE5;
     border-radius: 20px !important;
+}
+.popup-repair-types-nav__item.active {
+    border-color: #F48922;
 }
 
 @media (max-width: 1024px) {
@@ -5723,6 +5728,10 @@ div.wave-block:nth-child(17):after {
     text-align: center;
     border-collapse: collapse;
     background: #FBFAF8;
+    display: none;
+}
+.popup-repair-types-content-table__list.active {
+    display: block;
 }
 
 .popup-repair-types-content-table__list tr {
@@ -7283,21 +7292,19 @@ div.wave-block:nth-child(17):after {
 
 @media (max-width: 1024px) {
     .nav-list-popup-repair {
-        min-width: 3130px;
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
-        -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-        max-width: 100%;
+        justify-content: center;
+    }
+    .nav-list-popup-repair .popup-repair-types-nav__item {
+        display: none;
+    }
+    .nav-list-popup-repair .popup-repair-types-nav__item.active {
+        display: block;
     }
 }
 
-@media (max-width: 575px) {
-    .nav-list-popup-repair {
-        min-width: 2840px;
-    }
-}
 
 @media (max-width: 575px) {
     .nav-list-designs {

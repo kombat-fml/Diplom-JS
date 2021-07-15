@@ -1,4 +1,5 @@
 import { closeAllPopups, closePopup, openPopup } from "./popups";
+import request from './request';
 
 const bodyListeners = () => {
   document.body.addEventListener('keydown', event => {
@@ -18,6 +19,7 @@ const bodyListeners = () => {
 
     if (target.closest('.all-services')) {
       event.preventDefault();
+      request();
       closeAllPopups();
       openPopup(document.querySelector('.popup-repair-types'));
     }
