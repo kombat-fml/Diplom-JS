@@ -73,6 +73,7 @@ body {
 .button-ui_firm:disabled {
     cursor: auto;
     background-color: var(--black-color);
+    pointer-events: none;
 }
 
 .svg_ui {

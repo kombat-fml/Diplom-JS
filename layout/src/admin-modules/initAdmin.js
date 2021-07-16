@@ -1,31 +1,20 @@
-import { openPopup, closeAllPopups, closePopup } from "../modules/popups";
+import { openPopup } from "../modules/popups";
+import addOption from "./addOption";
+import changeTitleForm from "./changeTitleForm";
+import checkInputs from "./checkInputs";
+import clearAndClose from "./clearAndClose";
+import getItem from "./getItem";
+import formBody from "./formBody";
+import rendering from "./rendering";
+import request from "./request";
+import { addRow, clearTbody } from "./tbody";
+
 
 const initAdmin = () => {
-  const tbody = document.getElementById('tbody'),
-    select = document.getElementById('typeItem'),
-    buttonAction = document.querySelector('.button-ui_firm');
+  const select = document.getElementById('typeItem');
 
   let repairTypes = new Set(),
     repairArr = [];
-
-  const checkInputs = () => {
-    const inputs = document.querySelectorAll('.input');
-    if ([...inputs].every(input => input.value.trim() !== '')) {
-      buttonAction.disabled = false;
-    } else {
-      buttonAction.disabled = true;
-    }
-  }
-
-  const request = (url, method, body) => {
-    return fetch(url, {
-      method: method,
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(body)
-    });
-  }
 
   const addSet = (elem) => {
     repairTypes.add(elem);
@@ -36,50 +25,12 @@ const initAdmin = () => {
     repairArr.forEach(item => addSet(item.type));
   }
 
-  const rendering = (data) => {
-    data.forEach(item => addRow(item));
-  }
-
-  const addOption = (value) => {
-    const option = document.createElement('option');
-    option.value = value;
-    option.textContent = value;
-    select.append(option);
-  }
-
-
   const fillOptions = () => {
     select.textContent = '';
     addOption('Все услуги');
     [...repairTypes].forEach(item => {
       addOption(item);
     })
-  }
-
-  const addRow = ({id, type, name, units, cost}) => {
-    const row = document.createElement('tr');
-    row.classList.add('table__row');
-    row.innerHTML =
-    `
-      <td class="table__id table__cell">${id}</td>
-      <td class="table-type table__cell">${type}</td>
-      <td class="table-name table__cell">${name}</td>
-      <td class="table-units table__cell">${units}</td>
-      <td class="table-cost table__cell">${cost}</td>
-      <td>
-        <div class="table__actions table__cell">
-          <button class="button action-change"><span class="svg_ui"><svg class="action-icon_change"><use xlink:href="./img/sprite.svg#change"></use></svg></span><span>Изменить</span>
-          </button>
-          <button class="button action-remove"><span class="svg_ui"><svg class="action-icon_remove"><use xlink:href="./img/sprite.svg#remove"></use></svg></span><span>Удалить</span>
-          </button>
-        </div>
-      </td>
-    `;
-    tbody.append(row);
-  }
-
-  const clearTbody = () => {
-    tbody.textContent = '';
   }
 
   const getAllServices = () => {
@@ -109,33 +60,6 @@ const initAdmin = () => {
     }
   }
 
-  const clearAndClose = () => {
-    const inputs = document.querySelectorAll('.input');
-    inputs.forEach(input => input.value = '');
-    document.querySelector('.modal__header').dataset.id = '';
-    checkInputs();
-    closePopup(document.querySelector('.modal__overlay'))
-  }
-
-  const changeTitleForm = (type) => {
-    const title = document.querySelector('.modal__header');
-    title.dataset.type = type;
-    if (type === 'add') {
-      title.textContent = "Добавление новой услуги";
-    } else if (type === 'edit') {
-      title.textContent = "Изменение услуги";
-    }
-  }
-
-  const fillForm = (elem) => {
-    document.querySelector('.modal__header').dataset.id = elem.querySelector('.table__id').textContent;
-    document.getElementById('type').value = elem.querySelector('.table-type').textContent;
-    document.getElementById('name').value = elem.querySelector('.table-name').textContent;
-    document.getElementById('units').value = elem.querySelector('.table-units').textContent;
-    document.getElementById('cost').value = elem.querySelector('.table-cost').textContent;
-    checkInputs();
-  }
-
   const processingData = (data) => {
     repairArr.push(data);
     const selectedFilter = select.value;
@@ -159,15 +83,6 @@ const initAdmin = () => {
     } else {
       select.value = selectedFilter;
     }
-  }
-
-  const formBody = () => {
-    const body = {};
-    body.type = document.getElementById('type').value || '';
-    body.name = document.getElementById('name').value || '';
-    body.units = document.getElementById('units').value || '';
-    body.cost = document.getElementById('cost').value || '';
-    return body;
   }
 
   const addNewItem = () => {
@@ -253,11 +168,10 @@ const initAdmin = () => {
         changeTitleForm('add');
       }
 
-
       if (target.closest('.action-change')) {
         openPopup(document.getElementById('modal'));
         changeTitleForm('edit');
-        fillForm(target.closest('.table__row'));
+        getItem(target.closest('.table__row').querySelector('.table__id').textContent);
       }
 
       if (target.closest('.action-remove')) {
