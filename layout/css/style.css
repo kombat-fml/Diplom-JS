@@ -7283,12 +7283,6 @@ div.wave-block:nth-child(17):after {
     }
 }
 
-/* @media (max-width: 575px) {
-    .nav-list-repair {
-        min-width: 1086px;
-    }
-} */
-
 .nav-list-popup-repair {
     text-align: center;
     min-width: 320px;

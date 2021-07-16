@@ -42,7 +42,6 @@ const repairTabs = () => {
         slider.children[currSlide + direction].classList.add('active');
       }
     }
-    // changeCounter(slider);
   }
 
   const changeCounter = (slider) => {
