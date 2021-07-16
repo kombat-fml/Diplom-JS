@@ -38,28 +38,68 @@ const sendForm = (formId) => {
         hideModal();
       });
   };
+  const checkPhone = (input) => {
+    if (/^\+?[78]([-( )\d]){10,}$/.test(input.value)) {
+      input.style.border = "none";
+      return true;
+    } else {
+      input.style.border = "2px solid red";
+      return false;
+    }
+  }
+  const checkName = (input) => {
+    if (/^\S{2,}$/gi.test(input.value)) {
+      input.style.border = "none";
+      return true;
+    } else {
+      input.style.border = "2px solid red";
+      return false;
+    }
+  }
+  const checkCheckBox = (input) => {
+    if (input.checked) {
+      input.style.border = "none";
+      return true;
+    } else {
+      input.style.border = "2px solid red";
+      return false;
+    }
+  }
+
+  const validateInputs = (form) => {
+    const inputs = [...form.elements].filter(item => item.tagName.toLowerCase() !== 'button' && item.type !== 'button');
+    let valid = false;
+    inputs.forEach(input => {
+      input.value = input.value.trim();
+      if (input.name === 'phone') valid = checkPhone(input);
+      if (input.name === 'name') valid = checkName(input) && valid;
+      if (input.getAttribute('type') === 'checkbox') valid = checkCheckBox(input) && valid;
+    })
+    return valid;
+  }
 
   statusMessage.style.cssText = 'font-size: 2rem;';
 
   form.addEventListener('submit', (event) => {
     event.preventDefault();
-    // const target = event.target;
-    // проверка на валидность ***
-    request(form);
+    if (validateInputs(form)) {
+      request(form);
+    }
+  });
+
+  form.addEventListener('blur', () => {
   });
 
   const showModal = (title, msg = '') => {
     thankTitle.textContent = title;
     thankDescr.textContent = msg;
     openPopup(popupThank);
-    console.log('show');
   };
 
   const hideModal = () => {
     setTimeout(() => {
       closePopup(popupThank);
     }, 3000);
-    console.log('hide');
   };
 };
 export default sendForm;
