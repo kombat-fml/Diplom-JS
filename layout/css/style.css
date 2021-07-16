@@ -7268,21 +7268,26 @@ div.wave-block:nth-child(17):after {
 
 @media (max-width: 1024px) {
     .nav-list-repair {
-        min-width: 1200px;
+        /* min-width: 1200px; */
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
-        -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-        max-width: 100%;
+        justify-content: center;
+        /* max-width: 100%; */
+    }
+    .nav-list-repair .repair-types-nav__item {
+        display: none;
+    }
+    .nav-list-repair .repair-types-nav__item.active {
+        display: block;
     }
 }
 
-@media (max-width: 575px) {
+/* @media (max-width: 575px) {
     .nav-list-repair {
         min-width: 1086px;
     }
-}
+} */
 
 .nav-list-popup-repair {
     text-align: center;

@@ -1,5 +1,3 @@
-import SliderCarousel from "./sliderCarousel";
-
 const repairTabs = () => {
   const section = document.querySelector('.repair-types');
 
@@ -44,7 +42,7 @@ const repairTabs = () => {
         slider.children[currSlide + direction].classList.add('active');
       }
     }
-    changeCounter(slider);
+    // changeCounter(slider);
   }
 
   const changeCounter = (slider) => {
@@ -65,26 +63,26 @@ const repairTabs = () => {
       changeSlider(target.dataset.tab);
     }
 
-    if (target.closest('#repair-types-arrow_left')) changeSlide(section.querySelector('.types-repair.active'), -1);
-    if (target.closest('#repair-types-arrow_right')) changeSlide(section.querySelector('.types-repair.active'), 1);
+    if (target.closest('#repair-types-arrow_left')) {
+      changeSlide(section.querySelector('.types-repair.active'), -1);
+      changeCounter(section.querySelector('.types-repair.active'));
+    }
+    if (target.closest('#repair-types-arrow_right')) {
+      changeSlide(section.querySelector('.types-repair.active'), 1);
+      changeCounter(section.querySelector('.types-repair.active'));
+    }
 
+    if (target.closest('#nav-arrow-repair-right_base')) {
+      changeSlide(document.querySelector('.nav-list-repair'), 1);
+      changeSlider(currentSlide(document.querySelector('.nav-list-repair'))+1);
+    }
+    if (target.closest('#nav-arrow-repair-left_base')) {
+      changeSlide(document.querySelector('.nav-list-repair'), -1);
+      changeSlider(currentSlide(document.querySelector('.nav-list-repair'))+1);
+    }
   })
 
   changeSlider(1);
-  const repairSlider = new SliderCarousel({
-    main: '.repair-types-nav.desktop-hide',
-    wrap: '.nav-list-repair.desktop-hide',
-    mainClass: 'repair-slider',
-    wrapClass: 'repair-slider-wrapper',
-    itemClass: 'repair-slider-slide',
-    slidesToShow: 1,
-    infinity: true,
-    cloneSlides: false,
-    cloneClass: 'formula-slider__slide-clone',
-    prev: '#nav-arrow-repair-left_base',
-    next: '#nav-arrow-repair-right_base',
-  });
-  repairSlider.init();
 }
 
 export default repairTabs;
