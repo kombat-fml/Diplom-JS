@@ -461,6 +461,17 @@ body {
     background-color: white;
     border-collapse: collapse;
 }
+.tbody:after {
+    width: 100%;
+    display: block;
+    text-align: center;
+    font-size: 14px;
+    color: #222;
+    background-color: #f5f5f5;
+}
+.tbody:empty:after {
+    content: "Нет записей";
+}
 
 .table__row {
     height: 60px;
@@ -535,6 +546,9 @@ body {
 
 #modal {
     display: none;
+}
+#modal.active {
+    display: flex;
 }
 
 .modal {
