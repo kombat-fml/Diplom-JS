@@ -14,6 +14,16 @@ const documents = () => {
     }
   }
 
+  const changeCounter = (slider) => {
+    const sliderWrap = document.querySelector('.popup-transparency-slider-wrap'),
+      currSlide = currentSlide(slider),
+      countSlides = slider.children.length,
+      contentCurrent = sliderWrap.querySelector('.slider-counter-content__current'),
+      contentTotal = sliderWrap.querySelector('.slider-counter-content__total');
+    contentCurrent.textContent = currSlide + 1;
+    contentTotal.textContent = countSlides;
+  }
+
   const changeSlide = (slider, direction = 0) => {
     if (direction === 0) {
       slider.children[0].classList.add('active');
@@ -42,7 +52,14 @@ const documents = () => {
   section.addEventListener('click', event => {
     const target = event.target;
 
-    if (target.closest('.transparency-item__img')) openPopup(document.querySelector('.popup-transparency'));
+    if (target.closest('.transparency-item__img')) {
+      const modalSlider = document.querySelector('.popup-transparency-slider'),
+        id = target.closest('.transparency-item').dataset.id;
+      removeActiveClass(modalSlider);
+      modalSlider.children[id].classList.add('active');
+      changeCounter(modalSlider);
+      openPopup(document.querySelector('.popup-transparency'));
+    }
 
     if (target.closest('#transparency-arrow_left')) changeSlide(slider, -1);
     if (target.closest('#transparency-arrow_right')) changeSlide(slider, 1);

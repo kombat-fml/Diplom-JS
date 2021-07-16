@@ -42,15 +42,21 @@ const documentsPopup = () => {
         slider.children[currSlide + direction].classList.add('active');
       }
     }
-    changeCounter(slider);
   }
   changeSlide(slider);
+  changeCounter(slider);
 
   section.addEventListener('click', event => {
     const target = event.target;
 
-    if (target.closest('#transparency_left')) changeSlide(slider, -1);
-    if (target.closest('#transparency_right')) changeSlide(slider, 1);
+    if (target.closest('#transparency_left')) {
+      changeSlide(slider, -1);
+      changeCounter(slider);
+    }
+    if (target.closest('#transparency_right')) {
+      changeSlide(slider, 1);
+      changeCounter(slider);
+    }
   })
 }
 

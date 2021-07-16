@@ -6,19 +6,22 @@ const portfolio = () => {
     arrowLeft = document.getElementById('portfolio-arrow_left'),
     arrowRight = document.getElementById('portfolio-arrow_right');
 
-  let counter = 0,
-    step = 352,
-    currentSlide = 0,
+  let step = 352,
+    activeSlide = 0,
     maxSlides = 0;
 
+  const removeActiveClass = (parentEl) => {
+    [...parentEl.children].forEach(item => item.classList.remove('active'));
+  }
+
   const activateArrows = () => {
-    if (currentSlide === 0) {
+    if (activeSlide === 0) {
       arrowLeft.classList.remove('active');
     } else {
       arrowLeft.classList.add('active');
     }
 
-    if (currentSlide === maxSlides) {
+    if (activeSlide === maxSlides) {
       arrowRight.classList.remove('active');
     } else {
       arrowRight.classList.add('active');
@@ -27,9 +30,9 @@ const portfolio = () => {
 
   const changeSlide = (direction) => {
     const countSlides = portfolioSlider.children.length;
-    currentSlide += direction;
+    activeSlide += direction;
     activateArrows();
-    portfolioSlider.style.transform = `translateX(-${currentSlide * step}px)`
+    portfolioSlider.style.transform = `translateX(-${activeSlide * step}px)`
   }
 
   const culcMaxSlides = () => {
@@ -39,18 +42,41 @@ const portfolio = () => {
 
   const resize = () => {
     window.addEventListener('resize', () => {
-      currentSlide = 0;
+      activeSlide = 0;
       changeSlide(0);
       culcMaxSlides();
     })
   }
 
+  const currentSlide = (slider) => {
+    for (let i = 0; i < slider.children.length; i++) {
+      if (slider.children[i].classList.contains('active')) return i;
+    }
+  }
+
+  const changeCounter = (slider) => {
+    const sliderWrap = document.querySelector('.popup-portfolio-slider-wrap'),
+      currSlide = currentSlide(slider),
+      countSlides = slider.children.length,
+      contentCurrent = sliderWrap.querySelector('.slider-counter-content__current'),
+      contentTotal = sliderWrap.querySelector('.slider-counter-content__total');
+    contentCurrent.textContent = currSlide + 1;
+    contentTotal.textContent = countSlides;
+  }
+
   portfolioSection.addEventListener('click', event => {
     const target = event.target;
 
-    if (target.classList.contains('portfolio-slider__slide-frame')) {
+    if (target.closest('.portfolio-slider__slide-frame')) {
+      const modalSlider = document.querySelector('.popup-portfolio-slider'),
+        textWrapper = document.querySelector('.popup-portfolio-text-wrapper'),
+        id = target.closest('.portfolio-slider__slide-frame').dataset.index;
+      removeActiveClass(modalSlider);
+      removeActiveClass(textWrapper);
+      modalSlider.children[id].classList.add('active');
+      textWrapper.children[id].classList.add('active');
+      changeCounter(modalSlider);
       openPopup(document.querySelector('.popup-portfolio'));
-
     }
 
     if (target.closest('#portfolio-arrow_left')) changeSlide(-1);
