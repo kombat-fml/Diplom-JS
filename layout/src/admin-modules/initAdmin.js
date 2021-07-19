@@ -145,6 +145,56 @@ const initAdmin = () => {
       .catch((error) => console.error('Ошибка запроса: ', error));
   }
 
+  const removeActiveClass = (parentEl) => {
+    [...parentEl.children].forEach(item => item.classList.remove('active'));
+  }
+  const activeDefaultSort = (parentEl) => {
+    [...parentEl.children].forEach(item => item.dataset.sort = "ASC");
+  }
+
+  const logout = () => {
+    const cookieData = document.cookie.split('; ');
+    document.cookie = `${cookieData[0]}; max-age=-1`;
+    document.cookie = `${cookieData[1]}; max-age=-1`;
+    window.location = window.location.href.replace(/(?!\/)\w+\.\w+/, '');
+  }
+
+  const sortFunction = (key, order = "ASC") => {
+    return function iinerSort(a, b) {
+      if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+        // property doesn't exist on either object
+        return 0;
+      }
+
+      const varA = (typeof a[key] === 'string')
+        ? a[key].toLowerCase() : a[key];
+      const varB = (typeof b[key] === 'string')
+        ? b[key].toLowerCase() : b[key];
+
+      let comparison = 0;
+      if (varA > varB) {
+        comparison = 1;
+      } else if (varA < varB) {
+        comparison = -1;
+      }
+      return ((order === 'DESC') ? (comparison * -1) : comparison);
+    }
+  }
+
+
+  const sortTable = (th) => {
+    const currentSort = th.dataset.sort;
+    const activeSort = th.classList.contains('active') ? true : false;
+    removeActiveClass(document.querySelector('thead').children[0]);
+    activeDefaultSort(document.querySelector('thead').children[0]);
+    if (activeSort) {
+      th.dataset.sort = currentSort === "ASC" ? "DESC" : "ASC";
+    }
+    th.classList.add('active');
+    repairArr.sort(sortFunction(th.dataset.key, th.dataset.sort));
+    filterData();
+  }
+
   const addListeners = () => {
 
     document.querySelector('form').addEventListener('input', checkInputs);
@@ -191,6 +241,14 @@ const initAdmin = () => {
           if (document.querySelector('.modal__header').dataset.type === 'edit') {
             editItem();
           }
+        }
+      }
+
+      if (target.classList.contains('exit')) logout();
+
+      if (target.closest('thead')) {
+        if (target.closest('.table-th') && !target.closest('.th-cost') && !target.closest('.th-handler')) {
+          sortTable(target.closest('.table-th'));
         }
       }
     })

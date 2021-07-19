@@ -509,9 +509,16 @@ body {
 }
 
 .table-th span {
+    display: none;
     margin-left: 3px;
     color: var(--firm_color);
     font-size: 12px;
+}
+.table-th.active span {
+    display: inline-flex;
+}
+.table-th.active[data-sort="DESC"] span {
+    transform: scale(1, -1);
 }
 
 .table__actions {
@@ -597,4 +604,24 @@ body {
     width: 17px;
     height: 17px;
     fill: var(--txt_grey);
+}
+.exit {
+    position: absolute;
+    right: 0;
+    top: 20px;
+    background-color: #fff;
+    border: 2px solid var(--grey_color);
+    padding: 10px 20px;
+    min-width: 120px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: .4s;
+}
+.exit:hover {
+    border-color: var(--hover_color);
+}
+
+.container {
+    position: relative;
 }

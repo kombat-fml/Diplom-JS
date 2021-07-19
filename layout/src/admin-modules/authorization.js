@@ -28,7 +28,6 @@ const authorization = () => {
     }
   }
   const redirect = () => {
-    console.log(window);
     window.location = window.location.href + "table.html";
   }
 

@@ -12,6 +12,7 @@
 	<main class="main">
 		<div id="container" class="container">
 			<h1 class="title-page">Список услуг</h1>
+			<button class="exit">Выйти</button>
 			<label>
 				<select name="typeItem" id="typeItem">
 				</select>
@@ -21,13 +22,13 @@
 				<table id="table" class="table">
 					<thead>
 					<tr>
-						<th class="table-th th-id">ID<span class="svg_ui"><svg class="icon-sort"><use xlink:href="./img/sprite.svg#sorting"></use></svg></span>
+						<th class="table-th th-id" data-key="id" data-sort="ASC">ID<span class="svg_ui"><svg class="icon-sort"><use xlink:href="./img/sprite.svg#sorting"></use></svg></span>
 						</th>
-						<th class="table-th th-type">Тип услуги<span class="svg_ui"><svg class="icon-sort"><use xlink:href="./img/sprite.svg#sorting"></use></svg></span>
+						<th class="table-th th-type" data-key="type" data-sort="ASC">Тип услуги<span class="svg_ui"><svg class="icon-sort"><use xlink:href="./img/sprite.svg#sorting"></use></svg></span>
 						</th>
-						<th class="table-th th-name">Виды работ<span class="svg_ui"><svg class="icon-sort"><use xlink:href="./img/sprite.svg#sorting"></use></svg></span>
+						<th class="table-th th-name" data-key="name" data-sort="ASC">Виды работ<span class="svg_ui"><svg class="icon-sort"><use xlink:href="./img/sprite.svg#sorting"></use></svg></span>
 						</th>
-						<th class="table-th th-units">Еденицы измерения<span class="svg_ui"><svg class="icon-sort"><use xlink:href="./img/sprite.svg#sorting"></use></svg></span>
+						<th class="table-th th-units" data-key="units" data-sort="ASC">Единицы измерения<span class="svg_ui"><svg class="icon-sort"><use xlink:href="./img/sprite.svg#sorting"></use></svg></span>
 						</th>
 						<th class="table-th th-cost">Цена за единицу</th>
 						<th class="table-th th-handler">Действия</th>
