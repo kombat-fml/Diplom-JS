@@ -12,4 +12,4 @@
 #### [Preview admin page](https://kombat-fml.github.io/Diplom-JS/layout/admin)
 
 --- 
-Для работы админской части необходимо запустить сервер в репозитории `crm-backend` командой `node index` — подробней в [.readme репозитория](/crm-backend/README.md)
+Для работы админской части необходимо запустить сервер в репозитории `crm-backend` командой `node index` — подробней в [readme репозитория](/crm-backend/README.md)
